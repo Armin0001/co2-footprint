@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Popup demo</title>
+  <link rel="stylesheet" href="../../extension/popup.css">
+</head>
+<body>
+  <script>
+    // Renders the real popup with sample data instead of a live tab, for store images.
+    const sample = { host: 'news.example.com', bytes: 864000, files: 46, hidden: {}, truncated: false };
+    window.chrome = {
+      tabs: { query: async () => [{ id: 0 }] },
+      scripting: { executeScript: async () => [{ result: sample }] },
+    };
+
+    (async () => {
+      const html = await (await fetch('../../extension/popup.html')).text();
+      document.body.innerHTML = new DOMParser().parseFromString(html, 'text/html').body.innerHTML;
+      for (const file of ['carbon.js', 'popup.js']) {
+        await new Promise((resolve) => {
+          const script = document.createElement('script');
+          script.src = `../../extension/${file}`;
+          script.onload = resolve;
+          document.body.append(script);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

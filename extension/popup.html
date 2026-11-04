@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CO2 Footprint</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main aria-live="polite">
+    <p class="muted" id="loading">Measuring…</p>
+
+    <section id="result" hidden>
+      <p class="host" id="host"></p>
+      <p class="figure"><span id="grams"></span> <span class="unit">g CO₂e</span></p>
+      <p class="muted">per visit to this page</p>
+      <p class="rating"><span class="grade" id="grade"></span> <span id="grade-text"></span></p>
+      <dl class="stats">
+        <div><dt>Page size</dt><dd id="size"></dd></div>
+        <div><dt>Files</dt><dd id="files"></dd></div>
+        <div><dt>1,000 visits</dt><dd id="per-thousand"></dd></div>
+      </dl>
+      <p class="note" id="note" hidden></p>
+    </section>
+
+    <section id="error" hidden>
+      <p class="error-title" id="error-title"></p>
+      <p class="muted" id="error-text"></p>
+    </section>
+  </main>
+  <footer>
+    Estimated with the
+    <a href="https://sustainablewebdesign.org/estimating-digital-emissions/" target="_blank" rel="noopener">Sustainable Web Design Model</a>
+    on a global-average power grid.
+  </footer>
+  <script src="carbon.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
